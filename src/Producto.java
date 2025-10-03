@@ -1,4 +1,5 @@
-package modelo;
+package src;
+
 import java.util.ArrayList;
 
 public class Producto {
@@ -10,6 +11,7 @@ public class Producto {
     private String categoria;
     private int cantidad;
     private ArrayList<String> listaImagenes;
+    private Producto siguiente;
 
     //Metodos
     //Constructor
@@ -20,6 +22,7 @@ public class Producto {
         categoria = categoriaObj;
         cantidad = cantidadObj;
         listaImagenes = new ArrayList<>();
+        siguiente = null;
     }
 
     //Getters 
@@ -56,4 +59,13 @@ public class Producto {
                 "\nCategoria: " + categoria +
                 "\nCantidad: " + cantidad;
     }
+
+    public Producto getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Producto Nuevosiguiente) {
+        siguiente = Nuevosiguiente;
+    }
+
 }
