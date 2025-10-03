@@ -15,8 +15,6 @@ public class Main {
         listaProductos.insertarProductoInicio("06","Mouse ", 25.000, "Mouse", 20);
         listaProductos.insertarProductoInicio("07","Mouse 254x", 25.000, "Mouse", 20);
 
-        listaProductos.mostrarLista();
-
         System.out.println("Holaaa");
 
         listaProductos.modificarLista("09", "Prueba", 235.000, "PC", 8);

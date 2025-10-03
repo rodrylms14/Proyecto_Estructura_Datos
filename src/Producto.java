@@ -16,7 +16,7 @@ public class Producto {
     //Metodos
     //Constructor
 
-    public Producto(String idObj,String nombreObj, double precioObj, String categoriaObj, int cantidadObj){
+    public Producto(String idObj,String nombreObj, double precioObj, String categoriaObj, int cantidadObj, ArrayList<String> listaImagenesObj){
         id = idObj;
         nombre = nombreObj;
         precio = precioObj;
@@ -58,11 +58,14 @@ public class Producto {
     public void setCantidad(int nuevacantidad) {
         cantidad = nuevacantidad;
     }
+    public void setImagen(ArrayList<String> nuevaImagen){
+        listaImagenes = nuevaImagen;
+    }
 
     // toString 
     public String toString() {
         return  "Id: " + id +
-                "Producto: " + nombre +
+                "\nProducto: " + nombre +
                 "\nPrecio: " + precio +
                 "\nCategoria: " + categoria +
                 "\nCantidad: " + cantidad;
