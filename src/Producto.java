@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Producto {
     
     //Atributos 
-
+    private String id;
     private String nombre;
     private double precio;
     private String categoria;
@@ -16,7 +16,8 @@ public class Producto {
     //Metodos
     //Constructor
 
-    public Producto(String nombreObj, double precioObj, String categoriaObj, int cantidadObj){
+    public Producto(String idObj,String nombreObj, double precioObj, String categoriaObj, int cantidadObj){
+        id = idObj;
         nombre = nombreObj;
         precio = precioObj;
         categoria = categoriaObj;
@@ -26,6 +27,9 @@ public class Producto {
     }
 
     //Getters 
+    public String getId() {
+        return id;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -39,6 +43,9 @@ public class Producto {
         return cantidad;
     }
     // Setters
+    public void setId(String nuevoId) {
+        id = nuevoId;
+    }
     public void setNombre(String nuevonombre) {
         nombre = nuevonombre;
     }
@@ -54,7 +61,8 @@ public class Producto {
 
     // toString 
     public String toString() {
-        return "Producto: " + nombre +
+        return  "Id: " + id +
+                "Producto: " + nombre +
                 "\nPrecio: " + precio +
                 "\nCategoria: " + categoria +
                 "\nCantidad: " + cantidad;

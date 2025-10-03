@@ -24,14 +24,14 @@ public class Listaproductos {
         primero = nuevoPrimero;
     }
 
-    public void insertarProductoInicio(String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto) {
-        Producto nuevoProducto = new Producto(nombreProducto, precioProducto, categoriaProducto, cantidadProducto);
+    public void insertarProductoInicio(String idProducto, String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto) {
+        Producto nuevoProducto = new Producto(idProducto,nombreProducto, precioProducto, categoriaProducto, cantidadProducto);
         nuevoProducto.setSiguiente(primero);
         setPrimero(nuevoProducto);
     }
 
-    public void insertarProductoFinal(String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto) {
-        Producto nuevoProducto = new Producto(nombreProducto, precioProducto, categoriaProducto, cantidadProducto);
+    public void insertarProductoFinal(String idProducto,String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto) {
+        Producto nuevoProducto = new Producto(idProducto,nombreProducto, precioProducto, categoriaProducto, cantidadProducto);
         if(primero == null) {
             setPrimero(nuevoProducto); 
         } else {
@@ -54,5 +54,35 @@ public class Listaproductos {
             nodoActual = nodoActual.getSiguiente();
         }
     }
+
+    public void modificarLista(String idBuscar, String nuevoNombre, double nuevoPrecio, String nuevaCategoria, int nuevaCantidad) {
+        Producto nodoActual = primero;
+        while(nodoActual != null && !nodoActual.getId().equals(idBuscar)){
+            nodoActual = nodoActual.getSiguiente();
+        }
+        if(nodoActual != null){
+            nodoActual.setNombre(nuevoNombre);
+            nodoActual.setPrecio(nuevoPrecio);
+            nodoActual.setCategoria(nuevaCategoria);
+            nodoActual.setCantidad(nuevaCantidad);
+        } else {
+            System.out.println("Ingrese un Id de producto correcto");
+        }
+    }
+
+   /*  public void modificarLista(String idBuscar, String nuevoNombre, double nuevoPrecio, String nuevaCategoria, int nuevaCantidad) {
+        Producto nodoActual = primero;
+        while(nodoActual != null && nodoActual.getId() != Integer.parseInt(idBuscar)){
+            nodoActual = nodoActual.getSiguiente();
+        }
+        if(nodoActual != null){
+            nodoActual.setNombre(nuevoNombre);
+            nodoActual.setPrecio(nuevoPrecio);
+            nodoActual.setCategoria(nuevaCategoria);
+            nodoActual.setCantidad(nuevaCantidad);
+        } else {
+            System.out.println("Ingrese un Id de producto correcto");
+        }
+    }*/
 
 }
