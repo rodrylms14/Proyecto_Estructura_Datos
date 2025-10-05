@@ -22,8 +22,7 @@ public class Producto {
         precio = precioObj;
         categoria = categoriaObj;
         cantidad = cantidadObj;
-        listaImagenes = new ArrayList<>();
-        siguiente = null;
+        listaImagenes = (listaImagenesObj != null) ? listaImagenesObj : new ArrayList<>();        siguiente = null; 
     }
 
     //Getters 
@@ -42,6 +41,10 @@ public class Producto {
     public int getCantidad() {
         return cantidad;
     }
+    public ArrayList<String> getListaImagenes () {
+        return listaImagenes;
+    }
+    
     // Setters
     public void setId(String nuevoId) {
         id = nuevoId;
@@ -58,9 +61,17 @@ public class Producto {
     public void setCantidad(int nuevacantidad) {
         cantidad = nuevacantidad;
     }
-    public void setImagen(ArrayList<String> nuevaImagen){
-        listaImagenes = nuevaImagen;
+    public void setImagenes(ArrayList<String> nuevasImagen){
+        listaImagenes = (nuevasImagen != null) ? nuevasImagen : new ArrayList<>();
     }
+
+    public void agregarImagenes(ArrayList<String> rutaImagen) {
+        if (rutaImagen == null || rutaImagen.isEmpty()) return;
+        if (listaImagenes == null) listaImagenes = new ArrayList<>();
+        listaImagenes.addAll(rutaImagen);
+    }
+
+
 
     // toString 
     public String toString() {

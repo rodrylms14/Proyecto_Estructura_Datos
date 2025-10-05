@@ -18,7 +18,7 @@ public class Listaproductos {
     // Getters
 
     public Producto getPrimero() {
-        return primero;
+        return primero; 
     }
 
     //Setters 
@@ -27,12 +27,24 @@ public class Listaproductos {
     }
 
     public void insertarProductoInicio(String idProducto, String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto, ArrayList<String> listaImagenesProducto) {
+        
+        if(existeId(idProducto)) {
+            System.out.println("Ya existe un producto con el ID: " + idProducto );
+            return;
+        }
         Producto nuevoProducto = new Producto(idProducto,nombreProducto, precioProducto, categoriaProducto, cantidadProducto, listaImagenesProducto);
         nuevoProducto.setSiguiente(primero);
         setPrimero(nuevoProducto);
+        System.out.println("Prodcuto agregado con ID: " + idProducto);
     }
 
     public void insertarProductoFinal(String idProducto,String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto, ArrayList<String> listaImagenesObj) {
+        
+        if(existeId(idProducto)) {
+            System.out.println("Ya existe un producto con el ID: " + idProducto );
+            return;
+        }
+        
         Producto nuevoProducto = new Producto(idProducto,nombreProducto, precioProducto, categoriaProducto, cantidadProducto, listaImagenesObj);
         if(primero == null) {
             setPrimero(nuevoProducto); 
@@ -44,6 +56,18 @@ public class Listaproductos {
             nodoActual.setSiguiente(nuevoProducto);
         }
     }
+
+    public boolean existeId(String idProducto) {
+        Producto nodoActual = primero;
+        while (nodoActual != null) {
+            if (nodoActual.getId().equals(idProducto)) {
+                return true;
+            }
+            nodoActual = nodoActual.getSiguiente();
+        }
+        return false; 
+    }
+
     // Metodo para mostrar los productos y el coste TOTAL de cada producto y tambien la suma de todos los productos en la lista
     public void mostrarLista(){
         if(primero == null){
@@ -72,7 +96,7 @@ public class Listaproductos {
             nodoActual.setPrecio(nuevoPrecio);
             nodoActual.setCategoria(nuevaCategoria);
             nodoActual.setCantidad(nuevaCantidad);
-            nodoActual.setImagen(nuevaImagen);
+            nodoActual.setImagenes(nuevaImagen);
         } else {
             System.out.println("Ingrese un Id de producto correcto");
         }
