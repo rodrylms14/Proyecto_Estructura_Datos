@@ -1,150 +1,152 @@
 package src;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class Main {
 
+    private Tienda tienda = new Tienda();
+    private Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        menu();
+        new Main().run();
     }
 
-    /* 6 Productos cargados por default con numero de id del 01- al 06, se pueden agregar mas productos con diferente ID , tanto al inicio como al final */
-
-    public static void menu() {
-        Scanner sc = new Scanner(System.in);
-        Listaproductos lista = new Listaproductos();
-
-        datosDefault(lista);
-
+    public void run() {
         int opcion;
-        int opc;
-
         do {
-            System.out.println("\n===== MENU DE GESTION DE INVENTARIO =====");
-            System.out.println("1. Agregar producto");
-            System.out.println("2. Mostrar productos");
-            System.out.println("3. Modificar producto");
-            System.out.println("4. Salir");
+            System.out.println("\n Menú");
+            System.out.println("1) Insertar productos al inventario");
+            System.out.println("2) Insertar clientes en la cola");
+            System.out.println("3) Atender cliente siguiente");
+            System.out.println("4) Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine(); 
+            opcion = leerEntero();
 
-            switch(opcion) {
+            switch (opcion) {
+
                 case 1:
-                do { 
-                    System.out.println("Donde desea insertar el producto");
-                    System.out.println("1. Inicio.");
-                    System.out.println("2. Final.");
-                    opc = sc.nextInt();
-                    sc.nextLine();
-                    
-                    if(opc != 1 && opc != 2){
-                        System.out.println("Opcion invalida , ingrese 1 o 2");
-                    }
-                    } while(opc != 1 && opc != 2);
-
-                    System.out.print("Ingrese el ID del producto: ");
-                    String id = sc.nextLine();
-                    if(lista.existeId(id)) {
-                        System.out.println("Ya existe un producto con el ID: " + id );
-                        break;
-                    }
-                    System.out.print("Ingrese el nombre: ");
-                    String nombre = sc.nextLine();
-                    System.out.print("Ingrese el precio: ");
-                    double precio = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.print("Ingrese la categorea: ");
-                    String categoria = sc.nextLine();
-                    System.out.print("Ingrese la cantidad: ");
-                    int cantidad = sc.nextInt();
-                    sc.nextLine();
-
-                    // añadir imagen 
-                    ArrayList<String> imagenes = new ArrayList<>();
-                    System.out.print("Ingrese la ruta de la imagen (ej: src/images/laptop.jpg): ");
-                    String ruta = sc.nextLine();
-                    imagenes.add(ruta);
-
-                    if(opc == 1){
-                        lista.insertarProductoInicio(id, nombre, precio, categoria, cantidad, imagenes);
-                        System.out.println("Producto agregado con exito al Inicio.");
-                    } else {
-                        lista.insertarProductoFinal(ruta, nombre, precio, categoria, cantidad, imagenes);
-                         System.out.println("Producto agregado con exito al Final.");
-                    }
-
+                    insertarProductoInventario();
                     break;
 
                 case 2:
-                    lista.mostrarLista();
+                    insertarClienteConCarrito();
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el ID del producto a modificar: ");
-                    String idBuscar = sc.nextLine();
-                    System.out.print("Nuevo nombre: ");
-                    String nuevoNombre = sc.nextLine();
-                    System.out.print("Nuevo precio: ");
-                    double nuevoPrecio = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.print("Nueva categoria: ");
-                    String nuevaCategoria = sc.nextLine();
-                    System.out.print("Nueva cantidad: ");
-                    int nuevaCantidad = sc.nextInt();
-                    sc.nextLine();
-
-                    // nueva imagen
-                    ArrayList<String> nuevaImagen = new ArrayList<>();
-                    System.out.print("Ingrese nueva ruta de imagen (o deje vacio para mantener): ");
-                    String nuevaRuta = sc.nextLine();
-                    if (!nuevaRuta.isBlank()) {
-                        nuevaImagen.add(nuevaRuta);
-                    }
-
-                    lista.modificarLista(idBuscar, nuevoNombre, nuevoPrecio, nuevaCategoria, nuevaCantidad, nuevaImagen);
-                    System.out.println("Producto modificado correctamente.");
+                    atenderCliente();
                     break;
 
                 case 4:
-                    System.out.println("Hasta luego");
+                    System.out.println("Bye...");
                     break;
 
                 default:
-                    System.out.println("Opción no valida, intente nuevamente.");
+                    System.out.println("Opción inválida.");
             }
 
-        } while(opcion != 4);
-
-        sc.close();
+        } while (opcion != 4);
     }
 
-    public static void datosDefault(Listaproductos lista) {
+   /*Insertar producto en inventario*/
 
-        //Productos cargados //
+    private void insertarProductoInventario() {
 
-        ArrayList<String> img1 = new ArrayList<>();
-        img1.add("src/images/laptop.jpg");
-        lista.insertarProductoInicio("01", "Laptop", 550000, "Computadores", 10, img1);
+        System.out.println("\n Insertar producto al inventario");
 
-        ArrayList<String> img2 = new ArrayList<>();
-        img2.add("src/images/mouse.jpg");
-        lista.insertarProductoInicio("02", "Mouse", 15000, "Mouse's", 10, img2);
+        System.out.print("ID del producto: ");
+        String id = sc.nextLine();
 
-        ArrayList<String> img3 = new ArrayList<>();
-        img3.add("src/images/teclado.jpg");
-        lista.insertarProductoInicio("03", "Teclado", 35000, "Teclados", 10, img3);
+        System.out.print("Nombre del producto: ");
+        String nombre = sc.nextLine();
 
-        ArrayList<String> img4 = new ArrayList<>();
-        img4.add("src/images/monitor.jpg");
-        lista.insertarProductoInicio("04", "Monitor", 95000, "Monitores", 10, img4);
+        System.out.print("Precio: ");
+        double precio = leerDouble();
 
-        ArrayList<String> img5 = new ArrayList<>();
-        img5.add("src/images/audifonos.jpg");
-        lista.insertarProductoInicio("05", "Audífonos", 45000, "Audifonos", 10, img5);
+        System.out.print("Categoría: ");
+        String categoria = sc.nextLine();
 
-        ArrayList<String> img6 = new ArrayList<>();
-        img6.add("src/images/celular.jpg");
-        lista.insertarProductoInicio("06", "Celular", 240000, "Telefonos", 10, img6);
+        System.out.print("Cantidad disponible: ");
+        int cantidad = leerEntero();
+
+        Producto p = new Producto(id, nombre, precio, categoria, cantidad, null);
+
+        if (tienda.registrarProducto(p)) {
+            System.out.println("Producto insertado correctamente en el inventario.");
+        } else {
+            System.out.println("Error: el producto no pudo registrarse.");
+        }
+    }
+
+    /*Insertar cliente y llenar su carrito*/
+
+    private void insertarClienteConCarrito() {
+
+        System.out.println("\n Registrar cliente e insertarlo en la cola");
+
+        System.out.print("Cédula: ");
+        int cedula = leerEntero();
+
+        System.out.print("Nombre: ");
+        String nombre = sc.nextLine();
+
+        System.out.print("Tipo (BÁSICO/AFILIADO/PREMIUM): ");
+        String tipo = sc.nextLine();
+
+        Cliente c = new Cliente(cedula, nombre, tipo);
+
+        /*Insertar cliente en la cola de prioridad*/
+        tienda.registrarCliente(c);
+
+        System.out.println("Cliente registrado.");
+        System.out.println(" Inventario\n");
+        tienda.mostrarInventario();
+
+        /*Llenar carrito*/
+        boolean seguir = true;
+        while (seguir) {
+
+            System.out.print("\n ID del producto que quiere agregar a su carrito: ");
+            String id = sc.nextLine();
+
+            System.out.print("Cantidad: ");
+            int cant = leerEntero();
+
+            tienda.agregarProductoAlCarrito(c, id, cant);
+
+            System.out.print("¿Desea agregar otro producto? (s/n): ");
+            String r = sc.nextLine().toLowerCase(); /*por si acaso*/
+            seguir = r.equals("s");
+        }
+
+        System.out.println("Carrito del cliente completado.\n");
+    }
+
+    /*Atender cliente siguiente y generar factura*/
+
+    private void atenderCliente() {
+        System.out.println("\n Cliente siguiente");
+        tienda.atenderCliente();
+    }
+
+
+
+    private int leerEntero() {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (Exception e) {
+                System.out.print("Ingrese un número válido: ");
+            }
+        }
+    }
+
+    private double leerDouble() {
+        while (true) {
+            try {
+                return Double.parseDouble(sc.nextLine());
+            } catch (Exception e) {
+                System.out.print("Ingrese un número válido: ");
+            }
+        }
     }
 }
