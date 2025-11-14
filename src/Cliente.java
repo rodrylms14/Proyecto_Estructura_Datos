@@ -4,10 +4,10 @@ public class Cliente {
 
     private int cedula;
     private String nombre;
-    private String tipo;     // "BÁSICO", "AFILIADO", "PREMIUM"
-    private int prioridad;   // 1 = básico, 2 = afiliado, 3 = premium
+    private String tipo;   
+    private int prioridad;  
 
-    private Listaproductos carrito; // tu lista de productos
+    private Listaproductos carrito; 
 
     public Cliente(int cedula, String nombre, String tipo) {
         this.cedula = cedula;
@@ -52,29 +52,19 @@ public class Cliente {
         }
     }
 
-    // ➊ Agregar Producto al carrito (usando tu Listaproductos)
-    // Aquí sería ideal que antes de llamar a este método le preguntes al usuario cuántas unidades quiere.
     public void agregarProductoAlCarrito(Producto p, int cantidadComprada) {
-        if (p == null) {
-            System.out.println("No se puede agregar un producto nulo al carrito.");
+
+        if (p == null || cantidadComprada <= 0) {
+            System.out.println("Datos inválidos.");
             return;
         }
 
-        // Creamos una copia del producto SOLO para el carrito,
-        // para no modificar el stock original del inventario.
-        Producto copia = new Producto(
-                p.getId(),
-                p.getNombre(),
-                p.getPrecio(),
-                p.getCategoria(),
-                cantidadComprada,
-                p.getListaImagenes()
-        );
+        // Llamamos al método que acumula si ya existe
+        carrito.insertarOAcumular(p, cantidadComprada);
 
-        carrito.insertarProductoFinal(copia); // usando la nueva sobrecarga
+        System.out.println("Producto agregado al carrito.");
     }
 
-    // ➋ Calcular el total del carrito usando Listaproductos.calcularTotal()
     public double calcularTotalCarrito() {
         return carrito.calcularTotal();
     }

@@ -71,7 +71,6 @@ public class Listaproductos {
         return false; 
     }
 
-    // Metodo para mostrar los productos y el coste TOTAL de cada producto y tambien la suma de todos los productos en la lista
     public void mostrarLista(){
         if(primero == null){
             System.out.println("No hay datos que mostrar, porfavor ingrese un producto para poder mostrar infomacion");
@@ -99,7 +98,7 @@ public class Listaproductos {
         }
         return total;
     }
-    // Metodo para modificar lista por su numero de ID 
+
     public void modificarLista(String idBuscar, String nuevoNombre, double nuevoPrecio, String nuevaCategoria, int nuevaCantidad, ArrayList<String> nuevaImagen) {
         Producto nodoActual = primero;
         while(nodoActual != null && !nodoActual.getId().equals(idBuscar)){
@@ -115,5 +114,31 @@ public class Listaproductos {
             System.out.println("Ingrese un Id de producto correcto");
         }
     }
+
+    public void insertarOAcumular(Producto base, int cantidadExtra) {
+        if (base == null || cantidadExtra <= 0) return;
+
+        Producto nodoActual = primero;
+
+        while (nodoActual != null) {
+            if (nodoActual.getId().equalsIgnoreCase(base.getId())) {
+                nodoActual.setCantidad(nodoActual.getCantidad() + cantidadExtra);
+                return;
+            }
+            nodoActual = nodoActual.getSiguiente();
+        }
+
+        Producto copia = new Producto(
+                base.getId(),
+                base.getNombre(),
+                base.getPrecio(),
+                base.getCategoria(),
+                cantidadExtra,
+                base.getListaImagenes()
+        );
+
+        insertarProductoFinal(copia);
+    }
+
 
 }
