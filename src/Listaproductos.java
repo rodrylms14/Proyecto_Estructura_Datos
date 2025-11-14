@@ -38,22 +38,25 @@ public class Listaproductos {
         System.out.println("Prodcuto agregado con ID: " + idProducto);
     }
 
-    public void insertarProductoFinal(String idProducto,String nombreProducto, double precioProducto, String categoriaProducto, int cantidadProducto, ArrayList<String> listaImagenesObj) {
-        
-        if(existeId(idProducto)) {
-            System.out.println("Ya existe un producto con el ID: " + idProducto );
+    public void insertarProductoFinal(Producto producto) {
+        if (producto == null) {
+            System.out.println("No se puede insertar un producto nulo en la lista.");
             return;
         }
-        
-        Producto nuevoProducto = new Producto(idProducto,nombreProducto, precioProducto, categoriaProducto, cantidadProducto, listaImagenesObj);
-        if(primero == null) {
-            setPrimero(nuevoProducto); 
+
+        if (existeId(producto.getId())) {
+            System.out.println("Ya existe un producto con el ID: " + producto.getId());
+            return;
+        }
+
+        if (primero == null) {
+            setPrimero(producto);
         } else {
             Producto nodoActual = primero;
-            while(nodoActual.getSiguiente() != null){
+            while (nodoActual.getSiguiente() != null) {
                 nodoActual = nodoActual.getSiguiente();
             }
-            nodoActual.setSiguiente(nuevoProducto);
+            nodoActual.setSiguiente(producto);
         }
     }
 
@@ -84,6 +87,17 @@ public class Listaproductos {
             nodoActual = nodoActual.getSiguiente();
         }
         System.out.println("El total acumulado de todos los productos en Stock es de: " +totalAcumulado);
+    }
+
+    public double calcularTotal() {
+        double total = 0;
+        Producto nodoActual = primero;
+        while (nodoActual != null) {
+            double costoProducto = nodoActual.getCantidad() * nodoActual.getPrecio();
+            total += costoProducto;
+            nodoActual = nodoActual.getSiguiente();
+        }
+        return total;
     }
     // Metodo para modificar lista por su numero de ID 
     public void modificarLista(String idBuscar, String nuevoNombre, double nuevoPrecio, String nuevaCategoria, int nuevaCantidad, ArrayList<String> nuevaImagen) {
