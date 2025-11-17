@@ -14,12 +14,12 @@ public class Main {
     public void run() {
         int opcion;
         do {
-            System.out.println("\n Menú");
+            System.out.println("\n Menu");
             System.out.println("1) Insertar productos al inventario");
             System.out.println("2) Insertar clientes en la cola");
             System.out.println("3) Atender cliente siguiente");
             System.out.println("4) Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.print("Seleccione una opcion: ");
             opcion = leerEntero();
 
             switch (opcion) {
@@ -41,7 +41,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opción invalida.");
             }
 
         } while (opcion != 4);
@@ -62,7 +62,7 @@ public class Main {
         System.out.print("Precio: ");
         double precio = leerDouble();
 
-        System.out.print("Categoría: ");
+        System.out.print("Categoria: ");
         String categoria = sc.nextLine();
 
         System.out.print("Cantidad disponible: ");
@@ -83,25 +83,52 @@ public class Main {
 
         System.out.println("\n Registrar cliente e insertarlo en la cola");
 
-        System.out.print("Cédula: ");
+        System.out.print("Cedula: ");
         int cedula = leerEntero();
 
         System.out.print("Nombre: ");
         String nombre = sc.nextLine();
 
-        System.out.print("Tipo (BÁSICO/AFILIADO/PREMIUM): ");
-        String tipo = sc.nextLine();
+    System.out.println("Seleccione el tipo de cliente:");
+    System.out.println("1) Basico");
+    System.out.println("2) Afiliado");
+    System.out.println("3) Premium");
+
+    int opcionTipo = -1;
+    while (opcionTipo < 1 || opcionTipo > 3) {
+        System.out.print("Opcion (1-3): ");
+        opcionTipo = leerEntero();
+        if (opcionTipo < 1 || opcionTipo > 3) {
+            System.out.println(" Opcion invalida. Por favor ingrese 1, 2 o 3.");
+        }
+    }
+
+    String tipo;
+    switch (opcionTipo) {
+        case 1:
+            tipo = "BASICO";
+            break;
+        case 2:
+            tipo = "AFILIADO";
+            break;
+        case 3:
+            tipo = "PREMIUM";
+            break;
+        default:
+            tipo = "BASICO"; 
+    }
+
 
         Cliente c = new Cliente(cedula, nombre, tipo);
 
-        /*Insertar cliente en la cola de prioridad*/
+        /* Insertar cliente en la cola */
         tienda.registrarCliente(c);
 
-        System.out.println("Cliente registrado.");
-        System.out.println(" Inventario\n");
+        System.out.println("Cliente registrado con tipo: " + tipo + ".");
+        System.out.println("\n Inventario disponible ");
         tienda.mostrarInventario();
 
-        /*Llenar carrito*/
+        /* Llenar carrito */
         boolean seguir = true;
         while (seguir) {
 
@@ -111,15 +138,20 @@ public class Main {
             System.out.print("Cantidad: ");
             int cant = leerEntero();
 
-            tienda.agregarProductoAlCarrito(c, id, cant);
+            boolean agregado = tienda.agregarProductoAlCarrito(c, id, cant);
+
+            if (!agregado) {
+                System.out.println("Error al agregar el producto. Intente de nuevo.");
+            }
 
             System.out.print("¿Desea agregar otro producto? (s/n): ");
-            String r = sc.nextLine().toLowerCase(); /*por si acaso*/
+            String r = sc.nextLine().toLowerCase();
             seguir = r.equals("s");
         }
 
-        System.out.println("Carrito del cliente completado.\n");
+        System.out.println("\n Carrito del cliente completado.");
     }
+
 
     /*Atender cliente siguiente y generar factura*/
 
@@ -135,7 +167,7 @@ public class Main {
             try {
                 return Integer.parseInt(sc.nextLine());
             } catch (Exception e) {
-                System.out.print("Ingrese un número válido: ");
+                System.out.print("Ingrese un numero valido: ");
             }
         }
     }
@@ -145,7 +177,7 @@ public class Main {
             try {
                 return Double.parseDouble(sc.nextLine());
             } catch (Exception e) {
-                System.out.print("Ingrese un número válido: ");
+                System.out.print("Ingrese un numero valido: ");
             }
         }
     }
