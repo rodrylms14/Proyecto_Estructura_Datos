@@ -5,7 +5,8 @@ public class Cliente {
     private int cedula;
     private String nombre;
     private String tipo;   
-    private int prioridad;  
+    private int prioridad;
+    private String ubicacion;  
 
     private Listaproductos carrito; 
 
@@ -15,6 +16,7 @@ public class Cliente {
         this.tipo = tipo.toUpperCase().trim();
         this.prioridad = calcularPrioridadPorTipo(this.tipo);
         this.carrito = new Listaproductos();
+        this.ubicacion = "";
     }
 
     public Cliente(int cedula, String nombre, String tipo, int prioridad) {
@@ -23,6 +25,7 @@ public class Cliente {
         this.tipo = tipo;
         this.prioridad = prioridad;
         this.carrito = new Listaproductos();
+        this.ubicacion = "";
     }
 
     // Getters
@@ -31,6 +34,8 @@ public class Cliente {
     public String getTipo() { return tipo; }
     public int getPrioridad() { return prioridad; }
     public Listaproductos getCarrito() { return carrito; }
+    public String getUbicacion() { return ubicacion; }
+
 
     // Setters
     public void setPrioridad(int prioridad) { this.prioridad = prioridad; }
@@ -38,6 +43,9 @@ public class Cliente {
     public void setTipo(String tipo) {
         this.tipo = tipo;
         this.prioridad = calcularPrioridadPorTipo(tipo);
+    }
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     private int calcularPrioridadPorTipo(String tipo) {
@@ -72,6 +80,6 @@ public class Cliente {
     @Override
     public String toString() {
         return nombre + " (cédula: " + cedula + ", tipo: " + tipo +
-                ", prioridad: " + prioridad + ")";
+                ", prioridad: " + prioridad + "ubicacion: " + ubicacion +")";
     }
 }

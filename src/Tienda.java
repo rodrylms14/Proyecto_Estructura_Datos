@@ -4,11 +4,13 @@ public class Tienda {
 
     private Arbol inventario;   // Árbol binario de búsqueda con Productos
     private ColaClientes colaClientes;   // Cola con prioridad para clientes
+    private String ubicacion;
 
 
     public Tienda() {
         inventario = new Arbol();
         colaClientes = new ColaClientes();
+        ubicacion = "";
     }
 
 
@@ -18,6 +20,13 @@ public class Tienda {
 
     public ColaClientes getColaClientes() {
         return colaClientes;
+    }
+    public String getUbicacion() {
+        return ubicacion;
+    }
+    //Setter
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public boolean registrarProducto(Producto p) {
