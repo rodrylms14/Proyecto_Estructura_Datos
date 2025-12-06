@@ -55,7 +55,7 @@ public class Main {
 
         int opcion;
         do {
-            System.out.println("\n===== MENU PRINCIPAL =====");
+            System.out.println("\n Menú de la Tienda");
             System.out.println("1) Insertar productos al inventario");
             System.out.println("2) Insertar clientes en la cola");
             System.out.println("3) Atender cliente siguiente");

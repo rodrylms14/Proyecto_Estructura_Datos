@@ -67,7 +67,7 @@ public class Cliente {
             return;
         }
 
-        // Llamamos al método que acumula si ya existe
+        // Llamamos al metodo que acumula si ya existe
         carrito.insertarOAcumular(p, cantidadComprada);
 
         System.out.println("Producto agregado al carrito.");
