@@ -14,21 +14,14 @@ public class Main {
 
     public void run() {
 
-        // =====================================
-        // CONFIGURAR COLA PARA USAR GRAFO + TIENDA
-        // =====================================
         tienda.getColaClientes().configurarGrafoYTienda(grafo, tienda);
 
-        // =====================================
-        // UBICACIÓN DE LA TIENDA (SAN JOSÉ)
-        // =====================================
+
         String ubicacionTienda = "SAN_JOSE";
         tienda.setUbicacion(ubicacionTienda);
         grafo.agregarVertice(ubicacionTienda);
 
-        // =====================================
-        // PROVINCIAS (VÉRTICES DEL GRAFO)
-        // =====================================
+
         grafo.agregarVertice("ALAJUELA");
         grafo.agregarVertice("CARTAGO");
         grafo.agregarVertice("HEREDIA");
@@ -36,9 +29,7 @@ public class Main {
         grafo.agregarVertice("PUNTARENAS");
         grafo.agregarVertice("LIMON");
 
-        // =====================================
-        // CONEXIONES ENTRE PROVINCIAS (ARISTAS)
-        // =====================================
+
         grafo.agregarArista("SAN_JOSE", "ALAJUELA", 20);
         grafo.agregarArista("SAN_JOSE", "CARTAGO", 25);
         grafo.agregarArista("SAN_JOSE", "HEREDIA", 15);
@@ -53,9 +44,7 @@ public class Main {
 
         grafo.agregarArista("GUANACASTE", "PUNTARENAS", 80);
 
-        // =====================================
-        // PRODUCTOS PRECARGADOS (TIENDA TECNOLÓGICA)
-        // =====================================
+
         tienda.registrarProducto(new Producto("T001", "Laptop Lenovo IdeaPad 3", 285000, "Laptops", 10, null));
         tienda.registrarProducto(new Producto("T002", "Mouse Gamer Logitech G203", 15000, "Perifericos", 40, null));
         tienda.registrarProducto(new Producto("T003", "Teclado Mecánico Redragon K552", 25000, "Perifericos", 25, null));
@@ -63,9 +52,7 @@ public class Main {
         tienda.registrarProducto(new Producto("T005", "Audifonos Sony WH-CH510", 32000, "Audio", 18, null));
         tienda.registrarProducto(new Producto("T006", "Disco SSD Kingston 480GB", 29000, "Almacenamiento", 50, null));
 
-        // =====================================
-        // MENU PRINCIPAL
-        // =====================================
+
         int opcion;
         do {
             System.out.println("\n===== MENU PRINCIPAL =====");
